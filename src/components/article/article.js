@@ -1,3 +1,4 @@
+
 import './article.less'
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
@@ -115,3 +116,42 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+function articleMaker(articleObj) {
+  const article = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const paragraphOne = document.createElement('p');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  article.classList.add('article');
+  date.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(paragraphOne);
+  article.appendChild(paragraphTwo);
+  article.appendChild(paragraphThree);
+  article.appendChild(expandButton);
+
+  title.textContent = articleObj.title;
+  date.textContent = articleObj.date;
+  paragraphOne.textContent = articleObj.firstParagraph;
+  paragraphTwo.textContent = articleObj.secondParagraph;
+  paragraphThree.textContent = articleObj.thirdParagraph;
+  expandButton.textContent = '+';
+
+
+  expandButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  })
+
+  return article;
+
+}
+
+data.forEach(article => {
+  document.querySelector('div.articles').appendChild(articleMaker(article));
+})
